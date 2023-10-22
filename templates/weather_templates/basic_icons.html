@@ -1,0 +1,6 @@
+<p>Temperatura: {{ weather_data.temperature }} &#8451;</p>
+<p>Wilgotność: {{ weather_data.humidity }}%</p>
+<p>Prędkość: {{ weather_data.wind_speed }} m/s</p>
+<p>Opis: {{ weather_data.description }}</p>
+
+<img src="http://openweathermap.org/img/w/{{ weather_data['weather'][0]['icon'] }}.png" alt="Weather Icon">

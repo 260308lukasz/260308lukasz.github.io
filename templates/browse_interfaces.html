@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Międzymordzie - Podgląd Interfejsów</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+    // Funkcja do ustawiania wartości w LocalStorage
+    function setLocalStorage(key, value) {
+        localStorage.setItem(key, value);
+    }
+
+    // Funkcja do pobierania wartości z LocalStorage
+    function getLocalStorage(key) {
+        return localStorage.getItem(key);
+    }
+</script>
+</head>
+<body>
+    <header>
+        <h1>Międzymordzie - Podgląd Interfejsów</h1>
+    </header>
+
+    {% include 'navbar.html' %}
+
+    <section>
+        <form class="hidden">
+            <select name="display_format_option_value" id="display_format_option_value">
+                <option value="main">Tekst</option>
+                <option value="description">Dokładny opis</option>
+                <option value="icons">Ikony</option>
+            </select>
+        </form>
+
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+    
+        {% if weather_data %}
+            <div class="container {{ theme }}">
+                
+                <div class="controls">
+                    <button class="toggle-button" onclick="toggleTheme()">Zmień motyw</button>
+                    <button class="toggle-button" onclick="toggleDetail()">Zmień szczegóły</button>
+                    <button class="toggle-button" onclick="toggleFormat()">Zmień format</button>
+                </div>
+
+                <h2>Informacje o pogodzie:</h2>
+                <table class="weather-table">
+                    <tr>
+                        <th>Parametr</th>
+                        <th>Wartość dzisiaj</th>
+                        <th>Wartość jutro</th>
+                        <th>Wartość pojutrze</th>
+                        <th>Wartość za trzy dni</th>
+                    </tr>
+
+                    <!-- STREFA TESTÓW  -->
+
+                    <!-- <p>forecast: {{ forecast_data['list'] }}</p> -->
+
+                    <!-- {% for forecast in forecast_data['list'] %}
+                        {% if loop.index % 8 == 0 %}
+                            <p>forecast main: {{ forecast['main'] }}</p>
+                            <p>forecast weather: {{ forecast['weather'] }}</p>
+                            <p>forecast wind: {{ forecast['wind'] }}</p>
+                            <p>forecast dt: {{ forecast['dt'] }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    <p>forecast na dziś{{ forecast_data['list'][0]['main'] }} czas: {{ forecast_data['list'][0]['dt'] }}</p> -->
+                    
+                    <!-- <p>datetime'y:</p>
+                    {% for forecast in forecast_data['list'] %}
+                        {% if loop.index % 8 == 0 %}
+                                <p>{{ forecast['dt'] }}</p>
+                        {% endif %}
+                    {% endfor %} -->
+
+                    <!-- <p>detail: {{ detail }}</p> -->
+
+                    <!-- <pre>{{ weather_data }}</pre> -->
+
+                    <!-- KONIEC STREFY TESTÓW -->
+
+                    <tr>
+                        <td>Temperatura</td>
+                        <td>{{ weather_data.temperature or 'Brak danych' }} °C</td>
+                        {% for forecast in forecast_data['list'] %}
+                            {% if loop.index % 8 == 0 and loop.index <= 24 %}
+                                <td>{{ forecast['main']['temp'] }} °C</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr class="advanced">
+                        <td>Odczuwalna</td>
+                        <td>{{ forecast_data['list'][0]['main']['feels_like'] }}°C</td>
+                        {% for forecast in forecast_data['list'] %}
+                            {% if loop.index % 8 == 0 and loop.index <= 24 %}
+                                <td>{{ forecast['main']['feels_like'] }} °C</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr class="advanced">
+                        <td>Ciśnienie</td>
+                        <td>{{ forecast_data['list'][0]['main']['pressure'] }} hPa</td>
+                        {% for forecast in forecast_data['list'] %}
+                            {% if loop.index % 8 == 0 and loop.index <= 24 %}
+                                <td>{{ forecast['main']['pressure'] }} hPa</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>Wilgotność</td>
+                        <td>{{ weather_data.humidity or 'Brak danych' }}%</td>
+                        {% for forecast in forecast_data['list'] %}
+                            {% if loop.index % 8 == 0 and loop.index <= 24 %}
+                                <td>{{ forecast['main']['humidity'] }}%</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>Prędkość wiatru</td>
+                        <td>{{ weather_data.wind_speed or 'Brak danych' }} m/s</td>
+                        {% for forecast in forecast_data['list'] %}
+                            {% if loop.index % 8 == 0 and loop.index <= 24 %}
+                                <td>{{ forecast['wind']['speed'] }} m/s</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr class="advanced">
+                        <td>Kierunek wiatru</td>
+                        <td>{{ forecast_data['list'][0]['wind']['deg'] }}°</td>
+                        {% for forecast in forecast_data['list'] %}
+                            {% if loop.index % 8 == 0 and loop.index <= 24 %}
+                                <td>{{ forecast['wind']['deg'] }}°</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr class="advanced">
+                        <td>Porywy wiatru</td>
+                        <td>{{ forecast_data['list'][0]['wind']['gust'] }} m/s</td>
+                        {% for forecast in forecast_data['list'] %}
+                            {% if loop.index % 8 == 0 and loop.index <= 24 %}
+                                <td>{{ forecast['wind']['gust'] }} m/s</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr class="description-row">
+                        <td class="description-cell-main">Krótki opis</td>
+                        <td class="description-cell-main">{{ weather_data.weather[0]['main'] }}</td>
+                        <td class="description-cell-description hidden">Dokładny opis</td>
+                        <td class="description-cell-description hidden">{{ weather_data.description }}</td>
+                        <td class="description-cell-icons hidden">Ikony</td>
+                        <td class="description-cell-icons hidden"><img src="{{ icon_path }}" alt="Weather Icon"> {{ weather_data.weather[0]['main'] }}</td>
+                        {% for forecast in forecast_data['list'] %}
+                            {% if loop.index % 8 == 0 and loop.index <= 24 %}
+                                <td class="description-cell-main">{{ forecast['weather'][0]['main'] }}</td>
+                                <td class="description-cell-description hidden">{{ forecast['weather'][0]['description'] }}</td>
+                                <td class="description-cell-icons hidden">
+                                    <img src="/static/weather_icons/{{ forecast['weather'][0]['icon'] }}.png" alt="Weather Icon">
+                                    {{ forecast['weather'][0]['main'] }}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </table>
+                <h2>Wybrane cechy</h2>
+                <p id="motyw">Motyw: jasny</p>
+                <p id="informacje">Informacje: złożone</p>
+                <p id="format">Format opisu: Krótki</p>
+            </div>
+
+        {% endif %}
+    </section>
+
+    {% include 'footer.html' %}
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

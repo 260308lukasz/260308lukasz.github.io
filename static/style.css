@@ -1,0 +1,190 @@
+/* style.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+header {
+    background-color: #3498db;
+    padding: 1rem;
+    text-align: center;
+    color: white;
+}
+
+nav {
+    background-color: #333;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: 16px;
+}
+
+section {
+    padding: 2rem;
+    text-align: center;
+}
+
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Dodatkowe style dla stopki */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.footer {
+    background-color: #2c3e50;
+    padding: 1rem;
+    text-align: right;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.about-info {
+    font-size: 14px;
+    margin-top: 5px;
+    white-space: normal;
+    padding-right: 50px;
+}
+
+/* zawartość aplikacji */
+.container {
+    padding-top: 50px;
+    padding-bottom: 100px;
+    background-color: #99c9e9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+.toggle-button {
+    margin-right: 10px;
+    padding: 8px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.weather-table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.weather-table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #4caf50;
+    color: white;
+}
+
+tr {
+    background-color: rgb(231, 231, 231);
+}
+
+.weather-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Ciemny motyw */
+
+.container.dark {
+    background-color: #333;
+    color: white;
+}
+
+.container.dark header {
+    background-color: #2c3e50;
+}
+
+.container.dark nav {
+    background-color: #111;
+}
+
+.container.dark .toggle-button {
+    background-color: #4caf50;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Domyślna opcja 'main' */
+.display-format-main .description-row .description-cell-main,
+.display-format-main .description-row .description-cell-description,
+.display-format-main .description-row .description-cell-icons {
+    display: hidden;
+}
+
+/* Dla opcji 'description' */
+/* .display-format-description .description-row .description-cell-main,
+.display-format-description .description-row .description-cell-description,
+.display-format-description .description-row .description-cell-icons {
+    display: none;
+} */
+
+/* Dla opcji 'icons' */
+/* .display-format-icons .description-row .description-cell-main,
+.display-format-icons .description-row .description-cell-description,
+.display-format-icons .description-row .description-cell-icons {
+    display: none;
+} */
+
+/* Dodaj pozostałe style dla ciemnego motywu */
+
+.container.dark .weather-table th {
+    background-color: #4caf50;
+    color: hsl(0, 0%, 100%);
+}
+
+.container.dark .weather-table tr {
+    background-color: hsl(0, 0%, 59%);
+    color: hsl(0, 0%, 100%);
+}
+
+.container.dark .weather-table tr:hover {
+    background-color: hsl(0, 0%, 66%);
+}

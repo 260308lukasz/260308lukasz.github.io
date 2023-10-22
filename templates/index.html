@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Międzymordzie</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Witaj w Międzymordziu! Stronie do oceny różnic w interfejsach</h1>
+    </header>
+
+    {% include 'navbar.html' %}
+    
+    <section>
+        <p>Obejrzyj sobie przygotowane przeze mnie międzymordzia.</p>
+        <button onclick="browseInterfaces()">Obejrzyj międzymordzia</button>
+    </section>
+
+    <section>
+        <p>Weź udział w eksperymencie na badanie zależności i skutków czynników międzymordzia.</p>
+        <button onclick="startSurvey()">Rozpocznij Badanie</button>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script>
+        function browseInterfaces() {
+            window.location.href = "/browse_interfaces";
+        }
+    </script>
+
+    <script>
+        function startSurvey() {
+            window.location.href = "/survey";
+        }
+    </script>
+</body>
+</html>

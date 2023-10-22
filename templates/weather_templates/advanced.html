@@ -1,0 +1,6 @@
+<p>Temperatura: {{ weather_data.temperature }} °C <img src="{{ url_for('static', filename='temperature_icon.png') }}" alt="Temperature Icon"></p>
+<p>Wilgotność: {{ weather_data.humidity }}% <img src="{{ url_for('static', filename='humidity_icon.png') }}" alt="Humidity Icon"></p>
+<p>Prędkość wiatru: {{ weather_data.wind_speed }} m/s <img src="{{ url_for('static', filename='wind_icon.png') }}" alt="Wind Icon"></p>
+<p>Opis: {{ weather_data.description }}</p>
+<p>Wschód słońca: {{ weather_data.sunrise }}</p>
+<p>Zachód słońca: {{ weather_data.sunset }}</p>
